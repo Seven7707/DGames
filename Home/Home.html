@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Home.ico" type="image/x-icon">
+    <title>Carrossel e Barra de Pesquisa</title>
+    <style>
+        /* Estilos gerais */
+ body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Container principal do carrossel */
+.carousel {
+    position: relative;
+    min-width: 463px;
+    max-width: 600px;
+    min-height: 242px;
+    max-height: 300px;
+    overflow: hidden;
+    border-radius: 30px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+/* Slides */
+.carousel-slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+
+/* Botões de navegação */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    z-index: 10;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Indicadores (pontos de navegação) */
+.carousel-indicators {
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+margin-top: 10px;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background-color: #007BFF;
+}
+
+/* Barra de pesquisa */
+.search-container {
+    margin-top: 70px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.search-input {
+    text-indent: 10px;
+    width: 100%;
+    height: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0px 0px 12px rgb(255, 255, 255);
+}
+
+.search-input:focus {
+    animation: rainbow 7s infinite; 
+}
+
+@keyframes rainbow {
+    0% { box-shadow: 0 0 8px 3px red; }
+    14.3% { box-shadow: 0 0 8px 3px orange; }
+    28.6% { box-shadow: 0 0 8px 3px yellow; }
+    42.9% { box-shadow: 0 0 8px 3px green; }
+    57.2% { box-shadow: 0 0 8px 3px blue; }
+    72.5% { box-shadow: 0 0 8px 3px indigo; }
+    85.8% { box-shadow: 0 0 8px 3px violet; }
+    100% { box-shadow: 0 0 8px 3px red; }
+}
+
+/* Resultados */
+.search-results {
+    display: grid; /* Modo grid para organização em colunas */
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+    gap: 20px; /* Espaçamento entre os quadrados */
+    margin-top: 10px;
+    width: 96%;
+    max-width: 1240px;
+    background-color: #ffffff00;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.search-results div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    height: 150px;
+}
+
+.search-item1 {
+    background: #00000000 url(Imagens/Fast\ Food\ Simulator.png);
+}
+
+.search-item2{
+    background: #00000000 url(Imagens/KLETKA.png);
+}
+
+.search-item3{
+    background: #00000000 url(Imagens/Content\ Warning.png);
+}
+
+.search-item4{
+    background: #00000000 url(Imagens/Kebab\ Chefs!.png);
+}
+
+.search-item5{
+    background: #00000000 url(Imagens/Phasmophobia.png);
+}
+
+.search-item6{
+    background: #00000000 url(Imagens/Project\ Zomboid.png);
+}
+
+.search-item7{
+    background: #00000000 url(Imagens/Buckshot\ Roulette.png);
+}
+
+.search-item8{
+    background: #00000000 url(Imagens/Liar’s\ Bar.png);
+}
+
+.search-item9{
+    background: #00000000 url(Imagens/Loch\ Ness.png);
+}
+/* e */
+
+div>a{
+    width: 100%;
+    height: 100%;
+    color: #00000000;
+}
+
+.search-results div:hover {
+    transform: scale(1.05);
+}
+
+
+button#playButton,#pauseButton {
+    width: 78px;
+    height: 33px;
+
+    border-radius: 20px;
+
+    margin-bottom: 10px;
+}
+
+button:hover {
+    color: white;
+
+    background: rgb(20, 20, 20);
+    cursor: pointer;
+
+    transition: 0.7s;
+}
+
+button#playButton{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+button#pauseButton{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+
+    position: absolute;
+    top: 10px;
+    left: 48px;
+
+}
+    </style>
+</head>
+<body>
+    <canvas id="backgroundCanvas"></canvas>
+
+    <!-- Carrossel -->
+    <div class="carousel" id="carousel">
+        <!-- Slides  -->
+        <!-- Adiciona Slide novos de games -->
+        <div class="carousel-slides" id="carousel-slides">
+            <div class="carousel-slide" data-shadow-color="rgba(0, 172, 193, 1)">
+                <a rel="noopener" target="_blank" href="https://1cloudfile.com/1rDvo#"><img src="Imagens/Fast Food Simulator.png" alt="Slide 1"></a>
+            </div>
+            <div class="carousel-slide" data-shadow-color="rgba(186, 6, 0, 1)">
+                <a rel="noopener" target="_blank" href="https://gofile.io/d/aDMeUj"><img src="Imagens/KLETKA.png" alt="Slide 2"></a>
+            </div>
+            <div class="carousel-slide" data-shadow-color="rgba(219, 190, 0, 1)">
+                <a rel="noopener" target="_blank" href="https://1cloudfile.com/3tveg#"><img src="Imagens/Content Warning.png" alt="Slide 3"></a>
+            </div>
+        </div>
+
+        <!-- Botões -->
+        <button class="carousel-button prev">❮</button>
+        <button class="carousel-button next">❯</button>
+    </div>
+
+    <!-- Indicadores abaixo do carrossel -->
+    <div class="carousel-indicators" id="carousel-indicators"></div>
+
+    <!-- Barra de Pesquisa -->
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Digite algo para pesquisar...">
+    </div>
+
+    <!-- adicionar no catalogo os games -->
+    <div class="search-results">
+        <div class="search-item1"><a rel="noopener" target="_blank" href="https://1cloudfile.com/1rDvo#">Fast Food Simulator</a></div>
+        <div class="search-item2"><a rel="noopener" target="_blank" href="https://gofile.io/d/aDMeUj">KLETKA</a></div>
+        <div class="search-item3"><a rel="noopener" target="_blank" href="https://1cloudfile.com/3tveg#">Content Warning</a></div>
+        <div class="search-item4"><a rel="noopener" target="_blank" href="https://1cloudfile.com/4PAyW#">Kebab Chefs!</a></div>
+        <div class="search-item5"><a rel="noopener" target="_blank" href="https://1cloudfile.com/4PyDV#">Phasmophobia</a></div>
+        <div class="search-item6"><a rel="noopener" target="_blank" href="https://1cloudfile.com/7lns#">Project Zomboid</a></div>
+        <div class="search-item7"><a rel="noopener" target="_blank" href="https://1cloudfile.com/27wde#">Buckshot Roulette</a></div>
+        <div class="search-item8"><a rel="noopener" target="_blank" href="https://1cloudfile.com/1rxj7#">Liar’s Bar</a></div>
+        <div class="search-item9"><a rel="noopener" target="_blank" href="https://1cloudfile.com/4PFzV#">Loch Ness</a></div>
+        
+    </div>
+
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="Home.mp3" type="audio/mp3">
+        Seu navegador não suporta áudio.
+    </audio>
+    <button id="playButton">▷</button>
+    <button id="pauseButton" disabled>||</button>
+
+    <script>
+       const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particlesArray = [];
+        const maxParticles = 100;
+        const mouse = { x: null, y: null };
+
+        // Configuração do mouse
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Classe de partículas
+        class Particle {
+            constructor(x, y, size, speedX, speedY) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.speedX = speedX;
+                this.speedY = speedY;
+                this.color = `rgba(255, 255, 255, 0.8)`;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Rebater nas bordas
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                // Conexão com o mouse
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 150})`;
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Inicializar partículas
+        function initParticles() {
+            particlesArray.length = 0;
+            for (let i = 0; i < maxParticles; i++) {
+                const size = Math.random() * 3 + 1;
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const speedX = (Math.random() - 0.5) * 2;
+                const speedY = (Math.random() - 0.5) * 2;
+                particlesArray.push(new Particle(x, y, size, speedX, speedY));
+            }
+        }
+
+        // Função de animação
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particlesArray.forEach((particle, index) => {
+                particle.update();
+                particle.draw();
+
+                // Conexão entre partículas
+                for (let j = index + 1; j < particlesArray.length; j++) {
+                    const otherParticle = particlesArray[j];
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 150})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Ajustar o canvas ao redimensionar
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        // Inicializar e animar
+        initParticles();
+        animate();
+
+//-------------------------------------------------------------------------------
+// Carrossel
+const carouselContainer = document.getElementById("carousel");
+const slidesContainer = document.getElementById("carousel-slides");
+const indicatorsContainer = document.getElementById("carousel-indicators");
+const slides = document.querySelectorAll(".carousel-slide");
+const totalSlides = slides.length;
+const prevButton = document.querySelector(".carousel-button.prev");
+const nextButton = document.querySelector(".carousel-button.next");
+let currentIndex = 0;
+let autoSlideInterval;
+
+function updateCarousel() {
+    const slideWidth = slidesContainer.clientWidth;
+    slidesContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+    // Atualiza os indicadores
+    document.querySelectorAll(".carousel-indicator").forEach((indicator, index) => {
+        indicator.classList.toggle("active", index === currentIndex);
+    });
+
+    // Atualiza o box-shadow do container principal com base no slide ativo
+    const activeSlide = slides[currentIndex];
+    const shadowColor = activeSlide.dataset.shadowColor;
+    carouselContainer.style.boxShadow = `0 8px 30px ${shadowColor}`;
+}
+
+// Navegação pelos botões
+nextButton.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateCarousel();
+});
+
+prevButton.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+});
+
+// Criar indicadores
+slides.forEach((_, index) => {
+    const indicator = document.createElement("span");
+    indicator.classList.add("carousel-indicator");
+    if (index === currentIndex) {
+        indicator.classList.add("active");
+    }
+    indicator.addEventListener("click", () => {
+        currentIndex = index;
+        updateCarousel();
+        resetAutoSlide();
+    });
+    indicatorsContainer.appendChild(indicator);
+});
+
+// Função para passar os slides automaticamente
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+    }, 3000); // Troca de slide a cada 3 segundos
+}
+
+function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+}
+
+function resetAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
+}
+
+// Pausa o auto-slide ao passar o mouse e reinicia ao sair
+slidesContainer.addEventListener("mouseover", stopAutoSlide);
+slidesContainer.addEventListener("mouseout", startAutoSlide);
+
+// Inicializa o carrossel
+updateCarousel();
+startAutoSlide();
+
+// Barra de Pesquisa
+const searchInput = document.getElementById('searchInput');
+const itemList = document.getElementById('itemList');
+const noResults = document.getElementById('noResults');
+const searchContainer = document.querySelector('.search-container');
+const searchResults = document.querySelector(".search-results");
+
+        // Exibir os resultados da pesquisa mesmo sem digitar
+        searchResults.style.display = 'grid';
+
+        // Filtragem dos resultados com base na barra de pesquisa
+        searchInput.addEventListener("input", function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            const items = document.querySelectorAll('.search-item1, .search-item2, .search-item3, .search-item4, .search-item5, .search-item6, .search-item7, .search-item8, .search-item9');
+
+            items.forEach(item => {
+                const itemText = item.textContent.toLowerCase();
+                if (itemText.includes(searchTerm)) {
+                    item.style.display = 'flex'; // Exibe o item
+                } else {
+                    item.style.display = 'none'; // Oculta o item
+                }
+            });
+        
+
+    noResults.style.display = hasResults ? 'none' : 'block';
+
+    // Rolar para a barra de pesquisa e os resultados
+    searchContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+// Ao focar na barra, rolar suavemente para ela
+searchInput.addEventListener('focus', () => {
+    searchContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+//-------------------------------------------------------------------------
+
+        // Captura os botões de Play e Pause
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const music = document.getElementById('backgroundMusic');
+
+        // Define o volume da música para um nível baixo
+        music.volume = 0.05;
+
+        // Música já começa tocando, o botão Play fica desabilitado
+        music.play();
+
+        // Função para tocar a música
+        playButton.addEventListener('click', function() {
+            music.play();
+            playButton.disabled = true; // Desabilita o botão Play
+            pauseButton.disabled = false; // Habilita o botão Pause
+        });
+
+        // Função para pausar a música
+        pauseButton.addEventListener('click', function() {
+            music.pause();
+            playButton.disabled = false; // Habilita o botão Play
+            pauseButton.disabled = true; // Desabilita o botão Pause
+        });
+    </script>
+</body>
+</html>

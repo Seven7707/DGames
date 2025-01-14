@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/Login/Login.ico" type="image/x-icon">
+    <title>Login Inicial '-'</title>
+</head>
+<style>
+    @charset "UTF-8";
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #06080a;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+main {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+
+    display: none;
+    flex-direction: column;
+    width: 500px;
+    height: 300px;
+
+    background-color: rgba(255, 255, 255, 0.226);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    border: 1px solid white;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 0px #ffffff81;;
+}
+
+main:hover {
+    color: black;
+    text-shadow: 5px 10px 5px #06080a;
+
+    transition: 0.7s;
+
+    input{
+        color: white;
+    
+        background: linear-gradient(135deg, #000000, #222222, #4e4e4e, #2e2e2e, #141414);
+    
+        transition: 0.7s;
+    }
+    
+}
+
+h2{
+    font-size: 500%;
+
+    margin-top: 4%;
+}
+
+form{
+    margin-top: 10%;
+}
+
+input{
+    text-indent: 10px;
+
+    height: 24px;
+
+    border-radius: 20px;
+    background: linear-gradient(45deg, #ff7eb3, #ff758c, #ff9a44, #ff3d71, #c471ed);
+}
+
+button {
+    width: 78px;
+    height: 33px;
+
+    border-radius: 20px;
+
+    margin-bottom: 10px;
+}
+
+button:hover {
+    color: white;
+
+    background: rgb(20, 20, 20);
+    cursor: pointer;
+
+    transition: 0.7s;
+}
+
+button#playButton{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+button#pauseButton{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+
+    position: absolute;
+    top: 10px;
+    left: 48px;
+
+}
+
+/* --------------------------------------------------------------- */
+
+/* Conteúdo verdadeiro */
+.real-content {
+    display: none;
+}
+
+/* Mensagem de Olá */
+.greeting-message {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 500%;
+
+    width: 500px;
+    height: 300px;
+
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* -------------------------------------------------------------------- */
+
+
+
+</style>
+<body>
+
+    <canvas id="backgroundCanvas"></canvas>
+
+    <div class="greeting-message" id="greetingMessage">Olá Dev ｼ</div>
+
+    <main class="realContent" id="realContent">
+
+        <h2>Login</h2>
+<!-- Login - -->
+        <form id="loginForm">
+
+            <label for="password">Senha:</label>
+
+            <input type="password" id="password" required><br><br>
+
+            <button type="submit">Entrar</button>
+
+        </form>
+
+        <p id="message"></p>
+
+    </main>
+
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="/Login/Login.mp3" type="audio/mp3">
+        Seu navegador não suporta áudio.
+    </audio>
+    <button id="playButton">▷</button>
+    <button id="pauseButton" disabled>||</button>
+
+    <script>
+        // Função para gerar a "senha do dia" baseada na data
+function gerarSenhaDoDia() {
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0'); // Dois dígitos para o dia
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0'); // Meses começam em 0
+    const ano = hoje.getFullYear();
+
+    // Retorna a senha no formato "dd/mm/yyyy" ou outro formato desejado
+    return `${dia}${mes}${ano}`;
+}
+
+// Evento de envio do formulário
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Evita o envio do formulário para o servidor
+
+    const senhaDigitada = document.getElementById('password').value;
+    const senhaCorreta = gerarSenhaDoDia();
+
+    if (senhaDigitada === senhaCorreta) {
+        setTimeout(function() { //contador
+            // Substitua 'outra-pagina.html' pelo URL desejado
+            window.location.href = "/DGames/Home/Home.html"; // URL da página para a qual você deseja redirecionar
+        }, 2000);
+
+    } else {
+        document.getElementById('message').textContent = "Senha incorreta! Tente novamente.";
+        document.getElementById('message').style.color = "red";
+    }
+});
+
+// -----------------------------------------------------------
+
+const canvas = document.getElementById('backgroundCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particlesArray = [];
+const maxParticles = 100;
+const mouse = { x: null, y: null };
+
+// Configuração do mouse
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
+
+window.addEventListener('mouseout', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
+// Classe de partículas
+class Particle {
+    constructor(x, y, size, speedX, speedY) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.color = `rgba(255, 255, 255, 0.8)`;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Rebater nas bordas
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+        // Conexão com o mouse
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 150) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 150})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+        }
+    }
+}
+
+// Inicializar partículas
+function initParticles() {
+    particlesArray.length = 0;
+    for (let i = 0; i < maxParticles; i++) {
+        const size = Math.random() * 3 + 1;
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const speedX = (Math.random() - 0.5) * 2;
+        const speedY = (Math.random() - 0.5) * 2;
+        particlesArray.push(new Particle(x, y, size, speedX, speedY));
+    }
+}
+
+// Função de animação
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particlesArray.forEach((particle, index) => {
+        particle.update();
+        particle.draw();
+
+        // Conexão entre partículas
+        for (let j = index + 1; j < particlesArray.length; j++) {
+            const otherParticle = particlesArray[j];
+            const dx = particle.x - otherParticle.x;
+            const dy = particle.y - otherParticle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 150) {
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 150})`;
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(particle.x, particle.y);
+                ctx.lineTo(otherParticle.x, otherParticle.y);
+                ctx.stroke();
+            }
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+
+// Ajustar o canvas ao redimensionar
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
+});
+
+// Inicializar e animar
+initParticles();
+animate();
+
+//-------------------------------------------------------------------------
+
+        // Captura os botões de Play e Pause
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const music = document.getElementById('backgroundMusic');
+
+        // Define o volume da música para um nível baixo
+        music.volume = 0.05;
+
+        // Música já começa tocando, o botão Play fica desabilitado
+        music.play();
+
+        // Função para tocar a música
+        playButton.addEventListener('click', function() {
+            music.play();
+            playButton.disabled = true; // Desabilita o botão Play
+            pauseButton.disabled = false; // Habilita o botão Pause
+        });
+
+        // Função para pausar a música
+        pauseButton.addEventListener('click', function() {
+            music.pause();
+            playButton.disabled = false; // Habilita o botão Play
+            pauseButton.disabled = true; // Desabilita o botão Pause
+        });
+
+//---------------------------------------------------------------------------
+
+        // Função para esconder a mensagem de boas-vindas e mostrar o conteúdo real
+        setTimeout(function() {
+            // Esconde a mensagem de boas-vindas
+            document.getElementById('greetingMessage').style.display = 'none';
+            
+            // Exibe o conteúdo real
+            document.getElementById('realContent').style.display = 'flex';
+        }, 3000); // 3000 milissegundos = 3 segundos
+
+//---------------------------------------------------------------------------
+
+
+
+    </script>
+</body>
+</html>
