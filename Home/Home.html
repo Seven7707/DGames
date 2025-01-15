@@ -174,6 +174,8 @@ margin-top: 10px;
     height: 150px;
 }
 
+/* Add novo slide no cartalogo */
+
 .search-item1 {
     background: #00000000 url(Imagens/Fast\ Food\ Simulator.png);
 }
@@ -221,7 +223,7 @@ margin-top: 10px;
 .search-item12{
     background: #00000000 url(Imagens/Gang\ Beasts.png);
 }
-/* e */
+/* --------------------------------------------------------------------------- */
 
 div>a{
     width: 100%;
@@ -279,8 +281,10 @@ button#pauseButton{
 
     <!-- Carrossel -->
     <div class="carousel" id="carousel">
+
         <!-- Slides  -->
-        <!-- Adiciona Slide novos de games -->
+
+        <!-- Adiciona Slide em destaque de games -->
         <div class="carousel-slides" id="carousel-slides">
             <div class="carousel-slide" data-shadow-color="rgba(0, 172, 193, 1)">
                 <a rel="noopener" target="_blank" href="https://1cloudfile.com/1rDvo#"><img src="Imagens/Fast Food Simulator.png" alt="Slide 1"></a>
@@ -306,7 +310,7 @@ button#pauseButton{
         <input type="text" class="search-input" id="searchInput" placeholder="Digite algo para pesquisar...">
     </div>
 
-    <!-- adicionar no catalogo os games -->
+    <!-- add no catalogo o nome e o link de download -->
     <div class="search-results">
         <div class="search-item1"><a rel="noopener" target="_blank" href="https://1cloudfile.com/1rDvo#">Fast Food Simulator</a></div>
         <div class="search-item2"><a rel="noopener" target="_blank" href="https://gofile.io/d/aDMeUj">KLETKA</a></div>
@@ -537,7 +541,12 @@ const searchResults = document.querySelector(".search-results");
         // Filtragem dos resultados com base na barra de pesquisa
         searchInput.addEventListener("input", function () {
             const searchTerm = searchInput.value.toLowerCase();
-            const items = document.querySelectorAll('.search-item1, .search-item2, .search-item3, .search-item4, .search-item5, .search-item6, .search-item7, .search-item8, .search-item9, .search-item10, .search-item11, .search-item12');
+            
+            const items = document.querySelectorAll(
+
+                '.search-item1, .search-item2, .search-item3, .search-item4, .search-item5, .search-item6, .search-item7, .search-item8, .search-item9, .search-item10, .search-item11, .search-item12'
+
+            );
 
             items.forEach(item => {
                 const itemText = item.textContent.toLowerCase();
