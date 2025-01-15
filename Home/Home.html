@@ -209,6 +209,18 @@ margin-top: 10px;
 .search-item9{
     background: #00000000 url(Imagens/Loch\ Ness.png);
 }
+
+.search-item10{
+    background: #00000000 url(Imagens/Lethal\ Company.png);
+}
+
+.search-item11{
+    background: #00000000 url(Imagens/Human\ Fall\ Flat.png);
+}
+
+.search-item12{
+    background: #00000000 url(Imagens/Gang\ Beasts.png);
+}
 /* e */
 
 div>a{
@@ -305,6 +317,9 @@ button#pauseButton{
         <div class="search-item7"><a rel="noopener" target="_blank" href="https://1cloudfile.com/27wde#">Buckshot Roulette</a></div>
         <div class="search-item8"><a rel="noopener" target="_blank" href="https://1cloudfile.com/1rxj7#">Liar’s Bar</a></div>
         <div class="search-item9"><a rel="noopener" target="_blank" href="https://1cloudfile.com/4PFzV#">Loch Ness</a></div>
+        <div class="search-item10"><a rel="noopener" target="_blank" href="https://1cloudfile.com/3tHod#">Lethal Company</a></div>
+        <div class="search-item11"><a rel="noopener" target="_blank" href="https://1cloudfile.com/27wx4#">Human Fall Flat</a></div>
+        <div class="search-item12"><a rel="noopener" target="_blank" href="https://1cloudfile.com/Lx11#">Gang Beasts</a></div>
         
     </div>
 
@@ -522,7 +537,7 @@ const searchResults = document.querySelector(".search-results");
         // Filtragem dos resultados com base na barra de pesquisa
         searchInput.addEventListener("input", function () {
             const searchTerm = searchInput.value.toLowerCase();
-            const items = document.querySelectorAll('.search-item1, .search-item2, .search-item3, .search-item4, .search-item5, .search-item6, .search-item7, .search-item8, .search-item9');
+            const items = document.querySelectorAll('.search-item1, .search-item2, .search-item3, .search-item4, .search-item5, .search-item6, .search-item7, .search-item8, .search-item9, .search-item10, .search-item11, .search-item12');
 
             items.forEach(item => {
                 const itemText = item.textContent.toLowerCase();
