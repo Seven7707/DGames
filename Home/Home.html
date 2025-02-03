@@ -161,6 +161,8 @@ margin-top: 10px;
 
 .search-results div {
     display: flex;
+    flex-direction: column;
+    
     justify-content: center;
     align-items: center;
     background-size: cover;
@@ -172,25 +174,15 @@ margin-top: 10px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
     height: 150px;
+    
 }
 
 /* Add novo slide no cartalogo */
 
-.search-button{
-    width: 100%;
-    height: 100%;
-    background-color: #00000000;
-    border: solid 0px #00000000;
-    color: #00000000;
+.search-button {
+
 }
 
-.search-button:hover{
-    width: 100%;
-    height: 100%;
-    background-color: #00000000;
-    border: solid 0px #00000000;
-    color: #00000000;
-}
 
 .search-item1 {
     background: #00000000 url(Imagens/Fast\ Food\ Simulator.png);
@@ -255,6 +247,24 @@ div>a{
     transform: scale(1.05);
 }
 
+.search-results div:hover .search-button {
+    display: grid;
+    width: 50%;
+    height: 15%;
+    margin: 5px;
+    padding: 3px;
+
+    background-color: #000000c2;
+    color: #ffffff;
+    border: solid 1px white;
+    border-radius: 5px;
+    text-decoration: none;
+    
+}
+
+.search-results div:hover .search-button:hover {
+    transform: scale(1.05);
+}
 
 button#playButton,#pauseButton {
     width: 78px;
@@ -332,31 +342,67 @@ button#pauseButton{
 
     <!-- add no catalogo o nome e o link de download -->
     <div class="search-results">
-        <div class="search-item1"><a rel="noopener" target="_blank" href="https://store4.gofile.io/download/web/ec97da37-ea9a-49f3-9c35-6005cea595c4/Fast.Food.Simulator.v0.2.0-OFME.rar">Fast Food Simulator</a></div>
+        <div class="search-item1">
+            <a rel="noopener" target="_blank" href="https://store4.gofile.io/download/web/ec97da37-ea9a-49f3-9c35-6005cea595c4/Fast.Food.Simulator.v0.2.0-OFME.rar">Fast Food Simulator</a>
+            <a class="search-button" rel="noopener" target="_blank" href="https://store8.gofile.io/download/web/1e7603ac-80a3-407e-9e5f-e5ecba6f9305/FastFoodSimulator_Fix_Repair_Steam_Generic.rar">Repair</a>
+        </div>
 
-        <div class="search-item2"><a rel="noopener" target="_blank" href="https://store1.gofile.io/download/web/89f6d8ce-3c74-4d0f-b17d-1f7f6e3404bf/KLETKA.v3538192-OFME.rar">KLETKA</a></div>
+        <div class="search-item2">
+            <a rel="noopener" target="_blank" href="https://store1.gofile.io/download/web/89f6d8ce-3c74-4d0f-b17d-1f7f6e3404bf/KLETKA.v3538192-OFME.rar">KLETKA</a>
+            <a class="search-button" rel="noopener" target="_blank" href="https://cold-na-phx-4.gofile.io/download/web/c5ec4e37-9c4f-4640-aab5-865dc10732b3/KLETKA_Fix_Repair_Steam_Generic.rar">Repair</a>
+        </div>
 
         <div class="search-item3"><a rel="noopener" target="_blank" href="https://store10.gofile.io/download/web/ccac200c-c659-4548-9a11-d65feaa8e3e7/Content.Warning.v1.17.b-OFME.rar">Content Warning</a></div>
 
-        <div class="search-item4"><a rel="noopener" target="_blank" href="https://cold2.gofile.io/download/web/eebbcda5-e9a8-4e24-9c37-5dd4fb3f3340/Kebab.Chefs%2521.Restaurant.Simulator.Build.15112024-OFME.rar">Kebab Chefs!</a></div>
+        <div class="search-item4">
+            <a rel="noopener" target="_blank" href="https://cold2.gofile.io/download/web/eebbcda5-e9a8-4e24-9c37-5dd4fb3f3340/Kebab.Chefs%2521.Restaurant.Simulator.Build.15112024-OFME.rar">Kebab Chefs!</a>
+            <a class="search-button" rel="noopener" target="_blank" href="https://cold1.gofile.io/download/web/8e0f1564-75a4-4806-adcf-f3e6956b8e06/KCRS_Fix_Repair_Steam_V2_Generic.rar">Repair</a>
+        </div>
 
-         <div class="search-item5"> <!--<button class="search-button" onclick="downloadAll()"> --> <a rel="noopener" target="_blank" href="https://hosters.online-fix.me:2053/Phasmophobia">Phasmophobia</a></button></div> 
+        <div class="search-item5"> 
+            <a class="search-button" rel="noopener" target="_blank" href="https://store4.gofile.io/download/web/bd2e04cd-5d64-4d2e-8a77-41d74df1f5fd/Phasmophobia.v0.11.1.1-OFME.part1.rar">Parte 1</a>
+        
+            <a class="search-button" rel="noopener" target="_blank" href="https://store2.gofile.io/download/web/b380afa4-eb0a-4067-a667-05ef30f1259f/Phasmophobia.v0.11.1.1-OFME.part2.rar">Parte 2</a>
 
-        <div class="search-item6"><a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/7lns/Project_Zomboid_v41.78.16.rar?download_token=eb71b6fb40c9448a36c07e5f5469a1a9a7af6c3b6e23c7317b57db4fd8073c39">Project Zomboid</a></div>
+            <a class="search-button" rel="noopener" target="_blank" href="https://store2.gofile.io/download/web/dc4bf735-eba7-4da6-98f8-9975fed27faf/Phasmophobia_Fix_Repair_Steam_V2_Generic.rar">Repair</a>
+        </div>
 
-        <div class="search-item7"><a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/27wde/Buckshot_Roulette_v2.1.0.rar?download_token=49e7d690dcf832b9208df8564b5e9186c4ebf1e1f7548fb293213ee0bb5d5ef7">Buckshot Roulette</a></div>
+        <div class="search-item6">
+            <a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/7lns/Project_Zomboid_v41.78.16.rar?download_token=eb71b6fb40c9448a36c07e5f5469a1a9a7af6c3b6e23c7317b57db4fd8073c39">Project Zomboid</a>
+        </div>
 
-        <div class="search-item8"><a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/1rxj7/Liars_Bar_v0.9.rar?download_token=ef1d232f30174c3c034bd479802ceadb81177b6dde146466e2c3be943284b4c2">Liar’s Bar</a></div>
+        <div class="search-item7">
+            <a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/27wde/Buckshot_Roulette_v2.1.0.rar?download_token=49e7d690dcf832b9208df8564b5e9186c4ebf1e1f7548fb293213ee0bb5d5ef7">Buckshot Roulette</a>
+            <a class="search-button" rel="noopener" target="_blank" href="https://store2.gofile.io/download/web/c58147d7-9134-46a3-88ee-0f622edce0b5/BuckshotRoulette_Fix_Repair_Steam_Generic.rar">Repair</a>
+        </div>
 
-        <div class="search-item9"><a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/4PFzV/Loch_Ness_Build_11252022_(2).rar?download_token=a35a151dd5a6557fec4787300e755614318562c7431b701da087bf3e82e7a2ff">Loch Ness</a></div>
+        <div class="search-item8">
+            <a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/1rxj7/Liars_Bar_v0.9.rar?download_token=ef1d232f30174c3c034bd479802ceadb81177b6dde146466e2c3be943284b4c2">Liar’s Bar</a>
+            <a class="search-button" rel="noopener" target="_blank" href="https://store5.gofile.io/download/web/ea644056-2524-429e-97f7-43b32b965c33/LiarsBar_Fix_Repair_Steam_V2_Generic.rar">Repair</a>
+        </div>
 
-        <div class="search-item10"><a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/3tHod/Lethal_Company_v69.rar?download_token=14a2d3f6678e860fe29d1fb44d38f1fff4ff4346706b2d341baf943dc1248f11">Lethal Company</a></div>
+        <div class="search-item9">
+            <a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/4PFzV/Loch_Ness_Build_11252022_(2).rar?download_token=a35a151dd5a6557fec4787300e755614318562c7431b701da087bf3e82e7a2ff">Loch Ness</a>
 
-        <div class="search-item11"><a rel="noopener" target="_blank" href="https://fs21.1cloudfile.com/27wx4/Human_Fall_Flat_Build_11272024.rar?download_token=34e8a116c7592da8d6e490a64c5568bc4a40d5ec31ff82e7e187286ab805f524">Human Fall Flat</a></div>
+        </div>
 
-        <div class="search-item12"><a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/Lx11/Gang_Beasts_v1.25.1646.0.rar?download_token=13d0d1c1f0864ba38897603a5e010cae99c24819bb42d4b266035baa6fddba2c">Gang Beasts</a></div>
+        <div class="search-item10">
+            <a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/3tHod/Lethal_Company_v69.rar?download_token=14a2d3f6678e860fe29d1fb44d38f1fff4ff4346706b2d341baf943dc1248f11">Lethal Company</a>
+        </div>
 
-        <div class="search-item13"><a rel="noopener" target="_blank" href="https://fs22.1cloudfile.com/3tT02/Aloft.v0.3.1.8.7z?download_token=3671d875d2b2722e82fe83e2c26ee6aaa6049529e8e6873b481627e59985f6ac">Aloft</a></div>
+        <div class="search-item11">
+            <a rel="noopener" target="_blank" href="https://fs21.1cloudfile.com/27wx4/Human_Fall_Flat_Build_11272024.rar?download_token=34e8a116c7592da8d6e490a64c5568bc4a40d5ec31ff82e7e187286ab805f524">Human Fall Flat</a>
+        </div>
+
+        <div class="search-item12">
+            <a rel="noopener" target="_blank" href="https://fs20.1cloudfile.com/Lx11/Gang_Beasts_v1.25.1646.0.rar?download_token=13d0d1c1f0864ba38897603a5e010cae99c24819bb42d4b266035baa6fddba2c">Gang Beasts</a>
+            <a class="search-button" rel="noopener" target="_blank" href="https://cold7.gofile.io/download/web/c6b9218b-6ce0-43e7-9770-ea522d25d0b7/GangBeasts_Fix_Repair_Steam_V4_Generic.rar">Repair</a>
+        </div>
+
+        <div class="search-item13">
+            <a rel="noopener" target="_blank" href="https://fs22.1cloudfile.com/3tT02/Aloft.v0.3.1.8.7z?download_token=3671d875d2b2722e82fe83e2c26ee6aaa6049529e8e6873b481627e59985f6ac">Aloft</a>
+            <a class="search-button" rel="noopener" target="_blank" href="https://cold-na-phx-6.gofile.io/download/web/93f2bd16-8055-4338-8ab6-dac3b9388567/Aloft_Fix_Repair_Steam_Generic.rar">Repair</a>
+        </div>
         
     </div>
 
@@ -368,27 +414,6 @@ button#pauseButton{
     <button id="pauseButton" disabled>||</button>
 
     <script>
-
-        // function downloadAll() {
-        //     // Links para download
-        //     const links = [
-        //         'https://store2.gofile.io/download/web/dc4bf735-eba7-4da6-98f8-9975fed27faf/Phasmophobia_Fix_Repair_Steam_V2_Generic.rar',
-        //         'https://store4.gofile.io/download/web/bd2e04cd-5d64-4d2e-8a77-41d74df1f5fd/Phasmophobia.v0.11.1.1-OFME.part1.rar',
-        //         'https://store2.gofile.io/download/web/b380afa4-eb0a-4067-a667-05ef30f1259f/Phasmophobia.v0.11.1.1-OFME.part2.rar'
-        //         ];
-
-        //     // Criar um link e forçar o clique para cada arquivo
-        //     links.forEach(url => {
-        //         const link = document.createElement('a');
-        //         link.href = url;
-        //         link.download = url.split('/').pop(); // Extrai o nome do arquivo da URL
-
-        //         // Adiciona o link ao documento e clica nele
-        //         document.body.appendChild(link);
-        //         link.click();
-        //         document.body.removeChild(link);
-        //     });
-        // }
 
         //----------------------------------------------------------------------------------------------------
        const canvas = document.getElementById('backgroundCanvas');
